@@ -10,8 +10,11 @@ const dotenv= require('dotenv');
 dotenv.config();
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const adminRouter = require('./routes/admin');
+const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+const paymentRouter = require('./routes/payment');
+
 
 database()
 var app = express();
@@ -26,8 +29,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
+app.use('/payment', paymentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
